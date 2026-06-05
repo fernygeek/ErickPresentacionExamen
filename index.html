@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presentación Web Neon | Mantenimiento de Software</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="scanlines"></div>
+  <div class="noise"></div>
+
+  <aside class="hud">
+    <div class="hud-brand">FIS • EPN</div>
+    <div class="hud-title">Mantenimiento de Software</div>
+    <div class="hud-progress">
+      <div id="progressBar"></div>
+    </div>
+    <div class="hud-counter"><span id="currentSlide">01</span> / <span id="totalSlides">12</span></div>
+  </aside>
+
+  <main class="deck" id="deck">
+    <!-- SLIDE 1 -->
+    <section class="slide active title-slide" data-title="Portada">
+      <div class="corner-dots left"></div>
+      <div class="corner-dots right"></div>
+      <div class="neon-frame">
+        <p class="eyebrow">Examen Práctico • Taller Evaluativo</p>
+        <h1>Cleaning CRUD</h1>
+        <h2>Mantenimiento de Software</h2>
+        <p class="subtitle">Evaluación, instrumentación de pruebas, logs y seguimiento de mantenibilidad</p>
+      </div>
+      <div class="footer-note">Use ← → o los botones para navegar</div>
+    </section>
+
+    <!-- SLIDE 2 -->
+    <section class="slide" data-title="Objetivo">
+      <div class="grid two-cols">
+        <div>
+          <p class="eyebrow">Contexto del proyecto</p>
+          <h2>Objetivo del sistema</h2>
+          <p>El proyecto <strong>cleaning-crud</strong> administra productos de limpieza mediante una API REST y una interfaz web estática. Implementa operaciones CRUD, estadísticas de inventario e integración HTTP con un gestor de eventos.</p>
+          <div class="callout positive">
+            <span>+</span>
+            <p>Base funcional sólida: CRUD completo, persistencia SQLite, validaciones, logs, pruebas unitarias y emisión de eventos.</p>
+          </div>
+        </div>
+        <div class="image-slot">
+          <div class="slot-label">Espacio para imagen</div>
+          <h3>Arquitectura general</h3>
+          <p>Inserta aquí un diagrama con: Frontend estático → API NestJS → SQLite → Event Manager.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3 -->
+    <section class="slide" data-title="Requerimiento principal">
+      <p class="eyebrow">Indicaciones del PDF</p>
+      <h2>Requerimiento principal</h2>
+      <div class="requirement-card">
+        <p>Construir un CRUD robusto, observable y seguro, partiendo de un CRUD inicial y aplicando los cuatro tipos de mantenimiento de software.</p>
+        <ul>
+          <li>Instrumentación obligatoria de pruebas unitarias.</li>
+          <li>Logs estructurados de auditoría.</li>
+          <li>Documentación estandarizada de API.</li>
+          <li>Protección por API Key y configuración externa.</li>
+        </ul>
+      </div>
+      <div class="mini-grid">
+        <article><strong>Correctivo</strong><span>Corrección de bugs y errores funcionales.</span></article>
+        <article><strong>Adaptativo</strong><span>Ajustes a nuevas restricciones de entorno.</span></article>
+        <article><strong>Perfectivo</strong><span>Pruebas, documentación y mantenibilidad.</span></article>
+        <article><strong>Preventivo</strong><span>Validaciones y reducción de riesgos futuros.</span></article>
+      </div>
+    </section>
+
+    <!-- SLIDE 4 -->
+    <section class="slide" data-title="Arquitectura">
+      <p class="eyebrow">Vista técnica</p>
+      <h2>Arquitectura implementada</h2>
+      <div class="architecture">
+        <div class="node">Interfaz Web<br><small>HTML estático</small></div>
+        <div class="arrow">→</div>
+        <div class="node">Cleaning CRUD<br><small>NestJS 11</small></div>
+        <div class="arrow">→</div>
+        <div class="node">SQLite<br><small>TypeORM</small></div>
+        <div class="arrow">→</div>
+        <div class="node">Event Manager<br><small>Eventos CRUD</small></div>
+      </div>
+      <div class="grid two-cols top-gap">
+        <div class="image-slot compact">
+          <div class="slot-label">Espacio para imagen</div>
+          <h3>Captura de módulos</h3>
+          <p>products.controller.ts, products.service.ts, product.entity.ts.</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Componente</th><th>Tecnología</th><th>Rol</th></tr></thead>
+            <tbody>
+              <tr><td>API</td><td>NestJS + TypeScript</td><td>Controla endpoints CRUD</td></tr>
+              <tr><td>BD</td><td>SQLite + TypeORM</td><td>Persistencia de productos</td></tr>
+              <tr><td>Eventos</td><td>Axios HTTP</td><td>Emite CREATE, QUERY, UPDATE, DELETE</td></tr>
+              <tr><td>Logs</td><td>Winston</td><td>Registro de operaciones y errores</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 5 -->
+    <section class="slide" data-title="CRUD">
+      <p class="eyebrow">Funcionalidad base</p>
+      <h2>Operaciones CRUD implementadas</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Operación</th><th>Endpoint</th><th>Método</th><th>Evento</th><th>Estado</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Crear</td><td>/products</td><td>POST</td><td>CREATE</td><td><span class="badge ok">Cumple</span></td></tr>
+            <tr><td>Listar</td><td>/products</td><td>GET</td><td>QUERY</td><td><span class="badge ok">Cumple</span></td></tr>
+            <tr><td>Consultar</td><td>/products/:id</td><td>GET</td><td>QUERY</td><td><span class="badge ok">Cumple</span></td></tr>
+            <tr><td>Actualizar</td><td>/products/:id</td><td>PATCH</td><td>UPDATE</td><td><span class="badge ok">Cumple</span></td></tr>
+            <tr><td>Eliminar</td><td>/products/:id</td><td>DELETE</td><td>DELETE</td><td><span class="badge ok">Cumple</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Aspecto positivo: el ciclo CRUD completo está presente y emite eventos hacia el gestor.</p>
+    </section>
+
+    <!-- SLIDE 6 -->
+    <section class="slide" data-title="Mantenimientos">
+      <p class="eyebrow">Evaluación por taxonomía</p>
+      <h2>Qué sí se implementó por tipo de mantenimiento</h2>
+      <div class="cards four">
+        <article class="card">
+          <h3>Correctivo</h3>
+          <p>Validación de IDs, control de 400/404 y transformación de errores inesperados en 500.</p>
+          <span class="badge ok">Cumple / Parcial</span>
+        </article>
+        <article class="card">
+          <h3>Adaptativo</h3>
+          <p>Uso de variables de entorno, API Key, endpoint /health e integración configurable con Event Manager.</p>
+          <span class="badge partial">Parcial</span>
+        </article>
+        <article class="card">
+          <h3>Perfectivo</h3>
+          <p>Pruebas unitarias, README, reporte, checklist, Postman y archivo OpenAPI.</p>
+          <span class="badge partial">Parcial</span>
+        </article>
+        <article class="card">
+          <h3>Preventivo</h3>
+          <p>DTOs con class-validator, ValidationPipe, restricciones de precio/cantidad y bloqueo básico de texto sospechoso.</p>
+          <span class="badge partial">Parcial</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- SLIDE 7 -->
+    <section class="slide" data-title="Matriz">
+      <p class="eyebrow">Cumplimiento</p>
+      <h2>Matriz resumida de requisitos</h2>
+      <div class="table-wrap large-table">
+        <table>
+          <thead><tr><th>Requisito</th><th>Estado</th><th>Aspecto positivo incluido</th><th>No se incluye como logro</th></tr></thead>
+          <tbody>
+            <tr><td>CRUD completo</td><td><span class="badge ok">Cumple</span></td><td>5 operaciones implementadas.</td><td>—</td></tr>
+            <tr><td>Manejo 400 / 404</td><td><span class="badge ok">Cumple</span></td><td>Validación y no encontrados controlados.</td><td>—</td></tr>
+            <tr><td>Errores 500</td><td><span class="badge partial">Parcial</span></td><td>Try/catch local.</td><td>No hay filtro global uniforme.</td></tr>
+            <tr><td>API Key</td><td><span class="badge partial">Parcial</span></td><td>Header X-FIS-EPN-KEY implementado.</td><td>Si falta FIS_EPN_KEY, queda permisivo.</td></tr>
+            <tr><td>Variables .env</td><td><span class="badge partial">Parcial</span></td><td>.env.example y variables previstas.</td><td>DB_SYNCHRONIZE no respeta false.</td></tr>
+            <tr><td>Logs estructurados</td><td><span class="badge partial">Parcial</span></td><td>Winston con nivel y timestamp.</td><td>Faltan route/action/ID uniforme en JSON.</td></tr>
+            <tr><td>Pruebas endpoint CRUD</td><td><span class="badge fail">No cumple</span></td><td>—</td><td>No se encontraron pruebas e2e CRUD.</td></tr>
+            <tr><td>Swagger /api/docs</td><td><span class="badge fail">No cumple</span></td><td>—</td><td>Solo existe openapi.yaml.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SLIDE 8 -->
+    <section class="slide" data-title="Estadísticas">
+      <p class="eyebrow">Métricas verificadas</p>
+      <h2>Estadísticas de pruebas y cumplimiento</h2>
+      <div class="stats-grid">
+        <div class="stat-card"><span data-count="6">0</span><p>Pruebas reportadas como aprobadas</p></div>
+        <div class="stat-card"><span data-count="3">0</span><p>Suites de pruebas verificadas</p></div>
+        <div class="stat-card"><span data-count="5">0</span><p>Endpoints CRUD implementados</p></div>
+        <div class="stat-card"><span data-count="17">0</span><p>Requisitos evaluados en matriz</p></div>
+      </div>
+      <div class="chart-layout">
+        <canvas id="complianceChart" width="520" height="260" aria-label="Gráfico de cumplimiento"></canvas>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Métrica</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>Cleaning CRUD unitarias</td><td>4 / 4 aprobadas</td></tr>
+              <tr><td>Event Manager unitarias</td><td>1 / 1 aprobada</td></tr>
+              <tr><td>Event Manager e2e</td><td>1 / 1 aprobada</td></tr>
+              <tr><td>Build de ambos proyectos</td><td>Aprobado</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 9 -->
+    <section class="slide" data-title="Logs y seguridad">
+      <p class="eyebrow">Observabilidad y protección</p>
+      <h2>Logs, API Key y health check</h2>
+      <div class="grid two-cols">
+        <div class="terminal-card">
+          <div class="terminal-header"><span></span><span></span><span></span> log esperado</div>
+          <pre><code>{
+  "level": "info",
+  "timestampISO": "2026-06-05T12:00:00.000Z",
+  "route": "/products",
+  "action": "CREATE",
+  "productId": 5,
+  "message": "Producto creado"
+}</code></pre>
+        </div>
+        <div>
+          <div class="check-item ok">/health público implementado.</div>
+          <div class="check-item ok">Cabecera X-FIS-EPN-KEY documentada.</div>
+          <div class="check-item partial">Seguridad parcial: depende de que FIS_EPN_KEY exista.</div>
+          <div class="check-item partial">Logs parciales: existen nivel, timestamp y mensaje; faltan campos uniformes.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 10 -->
+    <section class="slide" data-title="Evidencias">
+      <p class="eyebrow">Sustentación</p>
+      <h2>Espacios para capturas de evidencia</h2>
+      <div class="evidence-grid">
+        <div class="image-slot"><div class="slot-label">Imagen 01</div><h3>Backend en puerto 3001</h3><p>Captura de consola con npm run start:dev.</p></div>
+        <div class="image-slot"><div class="slot-label">Imagen 02</div><h3>Respuesta 400 / 404</h3><p>Captura de curl o Postman con errores controlados.</p></div>
+        <div class="image-slot"><div class="slot-label">Imagen 03</div><h3>Pruebas unitarias</h3><p>Resultado de npm test -- --runInBand.</p></div>
+        <div class="image-slot"><div class="slot-label">Imagen 04</div><h3>Evento registrado</h3><p>Captura del Event Manager recibiendo eventos CRUD.</p></div>
+      </div>
+    </section>
+
+    <!-- SLIDE 11 -->
+    <section class="slide" data-title="Recomendaciones">
+      <p class="eyebrow">Mejoras para cumplimiento total</p>
+      <h2>Acciones pendientes recomendadas</h2>
+      <div class="timeline">
+        <div><span>01</span><p>Servir Swagger UI en <strong>/api/docs</strong> y completar respuestas 400, 401 y 404.</p></div>
+        <div><span>02</span><p>Hacer obligatoria la API Key o bloquear el arranque si falta <strong>FIS_EPN_KEY</strong>.</p></div>
+        <div><span>03</span><p>Crear pruebas e2e del CRUD, seguridad, estadísticas e integración con Event Manager.</p></div>
+        <div><span>04</span><p>Estandarizar logs JSON con route, action, productId y timestampISO.</p></div>
+        <div><span>05</span><p>Corregir DB_SYNCHRONIZE, alinear puertos y completar sanitización en update.</p></div>
+      </div>
+    </section>
+
+    <!-- SLIDE 12 -->
+    <section class="slide ending" data-title="Cierre">
+      <div class="neon-frame small">
+        <p class="eyebrow">Conclusión técnica</p>
+        <h2>Cumplimiento parcial con base funcional sólida</h2>
+        <p>Se incluyen únicamente los puntos implementados y los aspectos positivos verificables. Los requisitos no cumplidos se presentan como pendientes, no como logros.</p>
+      </div>
+      <div class="final-grid">
+        <div><strong>Fortaleza</strong><span>CRUD completo + validaciones + pruebas unitarias.</span></div>
+        <div><strong>Riesgo</strong><span>Swagger UI, e2e y seguridad obligatoria aún pendientes.</span></div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="controls" aria-label="Controles de presentación">
+    <button id="prevBtn" type="button">← Anterior</button>
+    <button id="nextBtn" type="button">Siguiente →</button>
+  </nav>
+
+  <script src="script.js"></script>
+</body>
+</html>
